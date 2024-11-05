@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.Tech Admission Application - Reva University</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+        .form-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .form-group input[type="file"] {
+            padding: 0;
+        }
+        .form-group .radio-group {
+            display: flex;
+            gap: 10px;
+        }
+        .form-group .radio-group input {
+            width: auto;
+        }
+        .form-group button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: none;
+            background-color: #007BFF;
+            color: white;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="form-container">
+    <h2>B.Tech Admission Application - Reva University</h2>
+    <form id="applicationForm" action="/submit_application" method="post" enctype="multipart/form-data" onsubmit="return validateForm()">
+        
+        <div class="form-group">
+            <label for="studentName">Student Name:</label>
+            <input type="text" id="studentName" name="studentName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="studentMobile">Student Mobile:</label>
+            <input type="tel" id="studentMobile" name="studentMobile" required>
+            <div id="mobileNumberError" class="error">Mobile number must be 10 digits.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="studentEmail">Student Email:</label>
+            <input type="email" id="studentEmail" name="studentEmail" required>
+            <div id="emailError" class="error">Please enter a valid email address.</div>
+        </div>
+
+        <div class="form-group">
+            <label for="highestEdu">Highest Education:</label>
+            <input type="text" id="highestEdu" name="highestEdu" required>
+        </div>
+
+        <div class="form-group">
+            <label for="maxMarks">Max Marks Achieved:</label>
+            <input type="number" id="maxMarks" name="maxMarks" required>
+        </div>
+
+        <div class="form-group">
+            <label for="previousCollege">Previous College:</label>
+            <input type="text" id="previousCollege" name="previousCollege" required>
+        </div>
+
+        <div class="form-group">
+            <label for="group">Group:</label>
+            <input type="text" id="group" name="group" required>
+        </div>
+
+        <div class="form-group">
+            <label for="dob">Date of Birth:</label>
+            <input type="date" id="dob" name="dob" required>
+        </div>
+
+        <div class="form-group">
+            <label for="fatherName">Father's Name:</label>
+            <input type="text" id="fatherName" name="fatherName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="fatherProfession">Father's Profession:</label>
+            <input type="text" id="fatherProfession" name="fatherProfession" required>
+        </div>
+
+        <div class="form-group">
+            <label for="fatherEmail">Father's Email:</label>
+            <input type="email" id="fatherEmail" name="fatherEmail" required>
+        </div>
+
+        <div class="form-group">
+            <label for="fatherMobile">Father's Mobile:</label>
+            <input type="tel" id="fatherMobile" name="fatherMobile" required>
+        </div>
+
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <textarea id="address" name="address" rows="3" required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label>Seat Type:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="seatType" value="CET" required> CET</label>
+                <label><input type="radio" name="seatType" value="MQ"> MQ</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="branchOpted">Branch Opted:</label>
+            <select id="branchOpted" name="branchOpted" required>
+                <option value="">Select Branch</option>
+                <option value="Computer Science">Computer Science</option>
+                <option value="Mechanical Engineering">Mechanical Engineering</option>
+                <option value="Civil Engineering">Civil Engineering</option>
+                <option value="Electrical Engineering">Electrical Engineering</option>
+                <option value="Electronics and Communication">Electronics and Communication</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="firstPreference">First Preference:</label>
+            <input type="text" id="firstPreference" name="firstPreference" required>
+        </div>
+
+        <div class="form-group">
+            <label for="secondPreference">Second Preference:</label>
+            <input type="text" id="secondPreference" name="secondPreference" required>
+        </div>
+
+        <div class="form-group">
+            <label>Hostel Facility:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="hostelFacility" value="Yes" required> Yes</label>
+                <label><input type="radio" name="hostelFacility" value="No"> No</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Day Scholar:</label>
+            <div class="radio-group">
+                <label><input type="radio" name="dayScholar" value="Yes" required> Yes</label>
+                <label><input type="radio" name="dayScholar" value="No"> No</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="receiptUpload">Admission Fees Paid Receipt (Upload):</label>
+            <input type="file" id="receiptUpload" name="receiptUpload" required>
+        </div>
+
+        <div class="form-group">
+            <label for="pendingAmount">Pending Amount:</label>
+            <input type="number" id="pendingAmount" name="pendingAmount" required>
+        </div>
+
+        <div class="form-group">
+            <button type="submit">Submit Application</button>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    function validateForm() {
+        let isValid = true;
+
+        // Validate Mobile Number (10 digits)
+        const mobileNumber = document.getElementById("studentMobile").value;
+        const mobileNumberError = document.getElementById("mobileNumberError");
+        const mobilePattern = /^[0-9]{10}$/;
+        if (!mobilePattern.test(mobileNumber)) {
+            mobileNumberError.style.display = "block";
+            isValid = false;
+        } else {
+            mobileNumberError.style.display = "none";
+        }
+
+        // Validate Email
+        const email = document.getElementById("studentEmail").value;
+        const emailError = document.getElementById("emailError");
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailPattern.test(email)) {
+            emailError.style.display = "block";
+            isValid = false;
+        } else {
+            emailError.style.display = "none";
+        }
+
+        return isValid;
+    }
+</script>
+
+</body>
+</html>
