@@ -1,0 +1,37 @@
+def caesar_cipher(text, shift, operation):
+    if operation.lower() == "decrypt":
+        shift = -shift
+    result = ""
+    for char in text:
+        if char.isalpha():
+            base = ord('A') if char.isupper() else ord('a')
+            result += chr((ord(char) - base + shift) % 26 + base)
+        else:
+            result += char
+    return result
+
+def main():
+    print("Welcome to the Caesar Cipher Program!")
+    while True:
+        operation = input("Would you like to encrypt or decrypt a message? (type 'encrypt' or 'decrypt'): ").strip().lower()
+        if operation not in ["encrypt", "decrypt"]:
+            print("Invalid choice! Please type 'encrypt' or 'decrypt'.")
+            continue
+        
+        message = input("Enter your message: ").strip()
+        try:
+            shift = int(input("Enter the shift value (a whole number): ").strip())
+        except ValueError:
+            print("Invalid shift value! Please enter a whole number.")
+            continue
+        
+        result = caesar_cipher(message, shift, operation)
+        print(f"Result: {result}")
+        
+        run_again = input("Do you want to process another message? (yes/no): ").strip().lower()
+        if run_again != "yes":
+            print("Thank you for using the Caesar Cipher Program! Goodbye!")
+            break
+
+if __name__ == "__main__":
+    main()
